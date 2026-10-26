@@ -3,11 +3,12 @@
   color: var(--yellow);
 }
 :root {
-  --background: #323437;
-  --foreground: #d1d0c5;
-  --muted: #777a80;
-  --yellow: #e2b714;
-  --panel: #2c2e31;
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #323437;
+  --muted: #686b72;
+  --yellow: #F2AA4C;
+  --panel: #f4f4f5;
 }
 
 * {
@@ -43,6 +44,8 @@ button:hover {
   color: var(--foreground);
 }
 .app-shell {
+  width: 100%;
+  min-width: 0;
   max-width: 1600px;
   margin: auto;
   min-height: 100svh;
@@ -102,6 +105,7 @@ button:hover {
 }
 main {
   flex: 1;
+  min-width: 0;
 }
 .controls {
   display: flex;
@@ -142,9 +146,11 @@ main {
 .control-divider {
   height: 22px;
   width: 1px;
-  background: #444649;
+  background: #dedee1;
 }
 .writing-section {
+  width: 100%;
+  min-width: 0;
   margin: 40px auto 0;
   max-width: 1200px;
 }
@@ -183,7 +189,7 @@ main {
   line-height: 1.95;
   letter-spacing: 1px;
   white-space: pre-wrap;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   overflow-y: auto;
 }
 .text-mirror {
@@ -196,7 +202,7 @@ main {
 }
 .ghost,
 .placeholder {
-  color: #686a70;
+  color: #787b82;
   font-weight: 400;
 }
 .editor textarea {
@@ -210,7 +216,7 @@ main {
   font-weight: 700;
 }
 .editor textarea::selection {
-  background: #e2b71440;
+  background: #F2AA4C40;
   color: transparent;
 }
 .editor-meta {
@@ -240,12 +246,14 @@ main {
 }
 kbd {
   font: 10px monospace;
-  background: #424448;
-  color: #a3a5a8;
+  background: #ededf0;
+  color: #60636a;
   padding: 3px 6px;
   border-radius: 3px;
 }
 .recommendations {
+  width: 100%;
+  min-width: 0;
   max-width: 1200px;
   margin: 32px auto 24px;
 }
@@ -260,7 +268,7 @@ kbd {
 }
 .heading-dash {
   margin: 0 9px;
-  color: #57595d;
+  color: #b1b3b8;
 }
 .context {
   letter-spacing: 0;
@@ -271,7 +279,7 @@ kbd {
   max-width: 55%;
 }
 .context-value {
-  color: #a6a6a3;
+  color: #55585e;
   margin-left: 10px;
 }
 .suggestion-grid {
@@ -295,8 +303,8 @@ kbd {
   gap: 10px;
 }
 .suggestion:hover {
-  background: #292b2e;
-  border-color: #60605a;
+  background: #ededf0;
+  border-color: #c8c9cd;
 }
 .suggestion-number {
   font: 10px monospace;
@@ -325,12 +333,12 @@ kbd {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #3c3e41;
+  background: #e5e5e8;
 }
 .probability-track > span {
   height: 100%;
   display: block;
-  background: #65676a;
+  background: #a4a6ac;
 }
 .first .probability-track > span {
   background: var(--yellow);
@@ -350,7 +358,7 @@ kbd {
   gap: 12px;
   color: var(--muted);
   font: 12px monospace;
-  border: 1px dashed #45474a;
+  border: 1px dashed #d2d3d7;
   border-radius: 7px;
   padding: 20px;
 }
@@ -377,7 +385,7 @@ footer {
   gap: 7px;
 }
 .footer-bottom {
-  border-top: 1px solid #414346;
+  border-top: 1px solid #e5e5e8;
   padding-top: 14px;
   display: flex;
   justify-content: space-between;
