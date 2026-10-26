@@ -5,9 +5,12 @@ import { useEffect, useRef, useState } from "react";
 
 type Prediction = { items: [string, number][]; context: string[] };
 const methods = [
+  ["mle", "maximum likelihood estimation"],
+  ["laplace", "Laplace smoothing"],
+  ["addk", "add-k smoothing"],
   ["absdisc", "absolute discounting"],
+  ["interp", "linear interpolation"],
   ["backoff", "stupid backoff"],
-  ["mle", "unsmoothed"],
 ];
 const orders = ["unigram", "bigram", "trigram", "4-gram"];
 

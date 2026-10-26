@@ -109,6 +109,7 @@ main {
 }
 .controls {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 18px;
@@ -117,6 +118,9 @@ main {
 }
 .control-group {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
   align-items: center;
   gap: 3px;
   background: var(--panel);

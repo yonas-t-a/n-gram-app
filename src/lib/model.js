@@ -1,6 +1,7 @@
 
 const BOS = 1, UNK = 0;
 let M = null, W2I = new Map(), TOPUNI = [], BANNED = new Set([0, 1, 2]);
+let unigramCounts = [], unigramTotal = 0;
 
 function mapVariants(s) {                       // same letter-series merge as the Python preprocessing
   const ranges = [[0x1210, 0x1200], [0x1280, 0x1200], [0x1220, 0x1230], [0x12D0, 0x12A0], [0x1340, 0x1338]];
@@ -43,6 +44,24 @@ function entry(m, hist) {                        // statistics of the context ma
 
 function score(method, order, hist, w) {
   let p = M.uni[w] || 0;
+  if (method === "laplace" || method === "addk") {
+    const k = method === "laplace" ? 1 : 0.1;
+    const e = order === 1 ? null : entry(order, hist);
+    const count = order === 1 ? unigramCounts[w] : (e?.cnt.get(w) || 0);
+    const total = order === 1 ? unigramTotal : (e?.total || 0);
+    return (count + k) / (total + k * M.vocab.length);
+  }
+  if (method === "interp") {
+    let levels = 1;
+    for (let m = 2; m <= order; m++) {
+      const e = entry(m, hist);
+      if (e) {
+        p += (e.cnt.get(w) || 0) / e.total;
+        levels++;
+      }
+    }
+    return p / levels;
+  }
   if (method === "mle") {
     if (order === 1) return p;
     const e = entry(order, hist); return e ? (e.cnt.get(w) || 0) / e.total : 0;
@@ -71,6 +90,16 @@ function suggest(text, k, order, method) {
 
 function setModel(obj) {
   M = obj; W2I = new Map(M.vocab.map((w, i) => [w, i]));
+  // Recover unigram counts from all observed bigram successors.
+  unigramCounts = new Array(M.vocab.length).fill(0);
+  unigramTotal = 0;
+  for (const context of Object.values(M.ctx["2"])) {
+    for (let i = 0; i < context[2].length; i += 2) {
+      const count = context[2][i + 1];
+      unigramCounts[context[2][i]] += count;
+      unigramTotal += count;
+    }
+  }
   BANNED = new Set([0, 1, 2]); for (const p of M.placeholders || []) BANNED.add(W2I.get(p));
   TOPUNI = M.uni.map((p, i) => [i, p]).sort((a, b) => b[1] - a[1]).slice(0, 60).map(x => x[0]);
 }

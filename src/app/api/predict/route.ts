@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     typeof text !== "string" ||
     text.length > 20000 ||
     ![1, 2, 3, 4].includes(order) ||
-    !["absdisc", "backoff", "mle"].includes(method)
+    !["mle", "laplace", "addk", "absdisc", "interp", "backoff"].includes(method)
   ) {
     return Response.json(
       { error: "Invalid prediction request." },
