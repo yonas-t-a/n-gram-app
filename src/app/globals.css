@@ -7,7 +7,7 @@
   --background: #ffffff;
   --foreground: #323437;
   --muted: #686b72;
-  --yellow: #F2AA4C;
+  --yellow: #f2aa4c;
   --panel: #f4f4f5;
 }
 
@@ -216,7 +216,7 @@ main {
   font-weight: 700;
 }
 .editor textarea::selection {
-  background: #F2AA4C40;
+  background: #f2aa4c40;
   color: transparent;
 }
 .editor-meta {
